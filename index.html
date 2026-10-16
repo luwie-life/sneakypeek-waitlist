@@ -3,196 +3,279 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#faf8f4">
-  <meta name="description" content="Give your audience a taste of what you've created. Sneaky Peek turns your digital products into irresistible interactive previews.">
+  <meta name="theme-color" content="#faf9f6">
+  <meta name="description" content="Turn your books, courses, guides and digital products into interactive previews that make people want more.">
+  <meta property="og:title" content="Sneaky Peek — Let them peek. Make them want more.">
+  <meta property="og:description" content="Give your audience a taste of what you've created.">
+  <meta property="og:type" content="website">
   <title>Sneaky Peek — Let them peek. Make them want more.</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    referrerpolicy="no-referrer"
+  >
   <style>
     :root {
-      --paper: #faf8f4;
-      --ink: #22211f;
-      --muted: #77736d;
+      --paper: #faf9f6;
+      --white: #ffffff;
+      --ink: #25231f;
+      --muted: #817c74;
       --orange: #d97757;
-      --line: #e9e4dc;
-      --white: #fffefa;
+      --orange-light: #f3e4dc;
+      --line: #eae7e0;
       --serif: "Instrument Serif", Georgia, serif;
       --sans: "DM Sans", sans-serif;
       --mono: "DM Mono", monospace;
+      --container: 1180px;
     }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
     body {
       margin: 0;
       background: var(--paper);
       color: var(--ink);
       font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-
-    a { color: inherit; text-decoration: none; }
-
-    .wrap {
-      width: min(1120px, calc(100% - 44px));
-      margin: auto;
+    body,
+    button,
+    input {
+      font-family: var(--sans);
     }
-
-    nav {
-      height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--line);
+    button,
+    input,
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font-weight: 700;
-      font-size: 19px;
-      letter-spacing: -0.8px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-
-    .mark {
-      width: 27px;
-      height: 27px;
-      color: var(--orange);
+    button {
+      cursor: pointer;
+    }
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 4px;
+    }
+    ::selection {
+      background: #e9c1b0;
+      color: var(--ink);
+    }
+    .container {
+      width: min(var(--container), calc(100% - 100px));
+      margin-inline: auto;
+    }
+    .icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      font-weight: 500;
+    }
+    /* NAVIGATION */
+    .navigation {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 249, 246, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(234, 231, 224, 0.8);
+    }
+    .nav-inner {
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.9px;
+    }
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      color: var(--orange);
+      display: grid;
+      place-items: center;
+      font-size: 21px;
       letter-spacing: -5px;
       padding-right: 5px;
     }
-
-    .nav-link {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .nav-link span { color: var(--orange); margin-left: 5px; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
+    .nav-right {
+      display: flex;
       align-items: center;
-      gap: 60px;
-      padding: 92px 0 100px;
+      gap: 35px;
     }
-
+    .nav-link {
+      font-size: 12px;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--ink);
+    }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 17px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--white);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .nav-cta:hover {
+      border-color: #d5b3a3;
+      transform: translateY(-2px);
+    }
+    .nav-cta i {
+      color: var(--orange);
+      font-size: 10px;
+    }
+    /* HERO */
+    .hero {
+      padding: 116px 0 115px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 65px;
+      align-items: center;
+    }
     .eyebrow {
       display: flex;
       align-items: center;
-      gap: 9px;
-      color: var(--muted);
-      font: 11px var(--mono);
+      gap: 11px;
+      margin-bottom: 30px;
+      font: 10px var(--mono);
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 1.3px;
-      margin-bottom: 26px;
+      color: var(--muted);
     }
-
-    .dot {
-      height: 7px;
-      width: 7px;
+    .eyebrow-line {
+      width: 24px;
+      height: 1px;
       background: var(--orange);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px #d977571c;
     }
-
     h1 {
-      font-size: clamp(48px, 6.5vw, 76px);
-      line-height: .99;
-      letter-spacing: -4.5px;
-      font-weight: 500;
+      max-width: 670px;
       margin: 0;
-      max-width: 590px;
+      font-size: clamp(58px, 6.4vw, 88px);
+      line-height: 0.98;
+      letter-spacing: -5.6px;
+      font-weight: 500;
     }
-
     h1 em {
       color: var(--orange);
       font-family: var(--serif);
       font-weight: 400;
       letter-spacing: -2px;
     }
-
-    .hero-copy {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--muted);
+    .hero-description {
       max-width: 440px;
-      margin: 25px 0 28px;
+      margin: 29px 0 34px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.95;
     }
-
-    .form-box { max-width: 440px; }
-
-    .input-row {
+    .signup {
+      max-width: 445px;
+    }
+    .signup-row {
       display: flex;
+      gap: 8px;
       padding: 5px;
-      border: 1px solid #ded8ce;
-      border-radius: 12px;
+      border: 1px solid #e4dfd7;
       background: var(--white);
-      box-shadow: 0 5px 22px #34241408;
-      gap: 6px;
+      border-radius: 9px;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-
-    input[type="email"] {
-      min-width: 0;
+    .signup-row:focus-within {
+      border-color: #d7a18b;
+      box-shadow: 0 0 0 4px #d977570c;
+    }
+    .signup-row input {
       flex: 1;
+      min-width: 0;
+      padding: 14px 12px;
       border: 0;
       outline: none;
       background: transparent;
-      padding: 13px 11px;
       color: var(--ink);
-      font: 14px var(--sans);
+      font-size: 13px;
     }
-
-    input::placeholder { color: #a39d94; }
-
-    button {
-      cursor: pointer;
+    .signup-row input::placeholder {
+      color: #aaa49b;
+    }
+    .signup-button {
       border: 0;
-      border-radius: 8px;
+      border-radius: 6px;
       background: var(--ink);
       color: white;
-      padding: 0 18px;
-      font: 600 13px var(--sans);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 19px;
       white-space: nowrap;
-      transition: background .2s, transform .2s;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.25s, transform 0.25s;
     }
-
-    button:hover { background: var(--orange); transform: translateY(-1px); }
-    button:disabled { opacity: .65; cursor: wait; transform: none; }
-
+    .signup-button:hover {
+      background: var(--orange);
+    }
+    .signup-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+    .signup-button i {
+      font-size: 10px;
+    }
     .consent {
       display: flex;
       align-items: flex-start;
-      gap: 9px;
-      margin: 13px 2px 0;
-      font-size: 11px;
-      line-height: 1.6;
+      gap: 10px;
+      margin: 15px 2px 0;
       color: var(--muted);
+      font-size: 10px;
+      line-height: 1.8;
     }
-
-    .consent input { accent-color: var(--orange); margin-top: 3px; }
-
+    .consent input {
+      margin: 3px 0 0;
+      accent-color: var(--orange);
+      flex-shrink: 0;
+    }
     .form-message {
-      min-height: 20px;
-      font-size: 12px;
+      min-height: 19px;
       margin: 12px 2px 0;
       color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
     }
-
-    .form-message.success { color: #387653; }
-    .form-message.error { color: #b64b3a; }
-
+    .form-message.success {
+      color: #397650;
+    }
+    .form-message.error {
+      color: #b84f3d;
+    }
     .honeypot {
       position: absolute;
       left: -10000px;
@@ -200,487 +283,1038 @@
       height: 1px;
       overflow: hidden;
     }
-
-    .visual {
-      min-height: 430px;
+    .hero-footnote {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 25px;
+      color: #989188;
+      font-size: 10px;
+    }
+    .hero-footnote i {
+      font-size: 11px;
+      color: var(--orange);
+    }
+    /* PRODUCT PREVIEW */
+    .showcase {
+      min-height: 480px;
+      position: relative;
       display: grid;
       place-items: center;
-      position: relative;
       isolation: isolate;
     }
-
-    .halo {
+    .showcase-glow {
       position: absolute;
-      width: 350px;
-      height: 350px;
+      z-index: -2;
+      width: 390px;
+      height: 390px;
       border-radius: 50%;
-      background: #e9b79b30;
-      filter: blur(2px);
+      background: #edcbb91f;
+      filter: blur(8px);
+    }
+    .showcase-ring {
+      position: absolute;
       z-index: -1;
+      width: 410px;
+      height: 410px;
+      border: 1px solid #e8dfd3;
+      border-radius: 50%;
+      opacity: 0.75;
     }
-
-    .preview-card {
-      width: min(330px, 83%);
-      background: var(--white);
-      padding: 22px;
-      border: 1px solid #e8e0d5;
-      border-radius: 15px;
-      box-shadow: 0 25px 70px #3a2a1914;
-      transform: rotate(-3deg);
-      animation: float 6s ease-in-out infinite;
+    .showcase-ring::before,
+    .showcase-ring::after {
+      content: "";
+      position: absolute;
+      border: 1px solid #e8dfd3;
+      border-radius: 50%;
+      inset: 22px;
     }
-
-    .preview-top {
+    .showcase-ring::after {
+      inset: 46px;
+      opacity: 0.7;
+    }
+    .product-window {
+      width: min(365px, 85%);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid #e9e3da;
+      border-radius: 12px;
+      padding: 21px;
+      box-shadow:
+        0 35px 90px rgba(43, 33, 22, 0.07),
+        0 3px 12px rgba(43, 33, 22, 0.025);
+      transform: rotate(-2deg);
+      animation: levitate 7s ease-in-out infinite;
+    }
+    .window-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font: 10px var(--mono);
-      color: #999087;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      margin-bottom: 17px;
+      padding-bottom: 19px;
     }
-
-    .preview-label {
+    .window-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .window-brand-mark {
       color: var(--orange);
-      border: 1px solid #edc6b7;
-      border-radius: 20px;
-      padding: 5px 8px;
-      font-size: 9px;
+      font-size: 12px;
     }
-
-    .book {
-      height: 220px;
-      padding: 24px 21px;
-      background: #e8d7c3;
-      border-radius: 4px 10px 10px 4px;
-      box-shadow: inset 5px 0 0 #c7af94, 0 8px 15px #382b1a13;
+    .window-status {
+      color: var(--muted);
+      font: 9px var(--mono);
+    }
+    .cover {
+      position: relative;
+      overflow: hidden;
+      min-height: 270px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      overflow: hidden;
+      background: #e9d9c8;
+      border-radius: 4px 7px 7px 4px;
+      box-shadow: inset 4px 0 0 #d1bba4;
     }
-
-    .book::after {
+    .cover::before {
       content: "";
       position: absolute;
-      width: 170px;
-      height: 170px;
-      border: 1px solid #a17f5b65;
+      width: 220px;
+      height: 220px;
+      right: -78px;
+      bottom: -65px;
+      border: 1px solid #9e7d5a80;
       border-radius: 50%;
-      right: -55px;
-      bottom: -55px;
-      box-shadow: 0 0 0 14px #a17f5b10, 0 0 0 28px #a17f5b0b;
+      box-shadow:
+        0 0 0 15px #a4825b0b,
+        0 0 0 32px #a4825b0b,
+        0 0 0 49px #a4825b0b;
     }
-
-    .book-small {
-      font: 9px var(--mono);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #78654f;
-    }
-
-    .book-title {
-      font: 42px/.91 var(--serif);
-      letter-spacing: -1px;
-      color: #3c342a;
-      max-width: 220px;
-    }
-
-    .book-bottom {
-      font: 9px var(--mono);
-      color: #78654f;
-      letter-spacing: .8px;
-    }
-
-    .preview-caption {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 18px;
-      font-size: 12px;
-    }
-
-    .preview-caption strong { font-weight: 600; }
-    .preview-caption small { color: var(--muted); font-size: 10px; }
-
-    .floating-note {
+    .cover::after {
+      content: "";
       position: absolute;
-      right: -1px;
-      bottom: 55px;
-      background: #fffefaee;
-      border: 1px solid #e9e1d7;
-      backdrop-filter: blur(14px);
-      padding: 15px 17px;
-      border-radius: 12px;
-      box-shadow: 0 12px 35px #34241410;
-      transform: rotate(3deg);
-      animation: float 7s ease-in-out infinite reverse;
+      width: 150px;
+      height: 150px;
+      top: 45px;
+      right: -65px;
+      border: 1px solid #a4825b50;
+      border-radius: 50%;
     }
-
-    .note-label {
+    .cover-kicker {
+      position: relative;
+      z-index: 1;
       font: 9px var(--mono);
-      color: var(--orange);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 7px;
-    }
-
-    .note-text { font-size: 12px; font-weight: 600; }
-    .note-sub { color: var(--muted); font-size: 10px; margin-top: 5px; }
-
-    .section-line { border-top: 1px solid var(--line); }
-
-    .how {
-      padding: 75px 0 90px;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 25px;
-      margin-bottom: 36px;
-    }
-
-    .section-kicker {
-      color: var(--orange);
-      font: 10px var(--mono);
       text-transform: uppercase;
       letter-spacing: 1.4px;
-      margin-bottom: 13px;
+      color: #806b54;
     }
-
-    h2 {
-      font: 400 clamp(34px, 4vw, 48px)/1.08 var(--serif);
-      letter-spacing: -1px;
-      margin: 0;
+    .cover-title {
+      position: relative;
+      z-index: 1;
+      max-width: 250px;
+      font: 54px/0.91 var(--serif);
+      letter-spacing: -1.5px;
+      color: #42362a;
     }
-
-    .section-desc {
-      max-width: 290px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-      margin: 0 0 4px;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      background: #fffefa75;
-      padding: 24px;
-      border-radius: 12px;
-      min-height: 190px;
-      transition: transform .25s, border-color .25s, background .25s;
-    }
-
-    .step:hover {
-      transform: translateY(-4px);
-      border-color: #d9b6a5;
-      background: var(--white);
-    }
-
-    .step-number {
-      color: var(--orange);
-      font: 11px var(--mono);
-      margin-bottom: 31px;
-    }
-
-    .step h3 { font-size: 16px; margin: 0 0 10px; letter-spacing: -.3px; }
-    .step p { color: var(--muted); font-size: 12px; line-height: 1.75; margin: 0; }
-
-    .cta {
-      margin: 0 0 70px;
-      padding: 48px;
-      background: #292724;
-      color: #faf8f4;
-      border-radius: 15px;
+    .cover-bottom {
+      position: relative;
+      z-index: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 30px;
+      color: #806b54;
+      font: 9px var(--mono);
+      letter-spacing: 0.7px;
     }
-
-    .cta h2 { max-width: 470px; }
-    .cta h2 em { color: #e9a083; }
-    .cta p { color: #bcb6ae; font-size: 13px; line-height: 1.7; margin: 14px 0 0; }
-
-    .cta a {
-      flex-shrink: 0;
-      display: inline-block;
-      background: #faf8f4;
-      color: var(--ink);
-      border-radius: 9px;
-      padding: 15px 19px;
-      font-size: 12px;
-      font-weight: 700;
-      transition: background .2s;
-    }
-
-    .cta a:hover { background: #e9c2b1; }
-
-    footer {
-      min-height: 90px;
-      border-top: 1px solid var(--line);
+    .product-info {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 15px;
+      padding-top: 18px;
+    }
+    .product-name {
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .product-type {
+      margin-top: 5px;
+      font-size: 10px;
       color: var(--muted);
+    }
+    .product-arrow {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--orange);
       font-size: 11px;
     }
-
-    footer .brand { color: var(--ink); font-size: 15px; }
-
-    .fade-in {
+    .floating-card {
+      position: absolute;
+      right: -1px;
+      bottom: 46px;
+      min-width: 180px;
+      padding: 17px;
+      border: 1px solid #eae4da;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 15px 45px #38291b0d;
+      animation: levitate 8s ease-in-out infinite reverse;
+    }
+    .floating-label {
+      color: var(--orange);
+      font: 9px var(--mono);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .floating-title {
+      margin-top: 9px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .floating-subtitle {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .floating-icon {
+      position: absolute;
+      top: -13px;
+      right: 16px;
+      width: 27px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      background: var(--orange);
+      color: white;
+      border: 3px solid var(--paper);
+      border-radius: 50%;
+      font-size: 10px;
+    }
+    /* SHARED SECTIONS */
+    .section-divider {
+      border-top: 1px solid var(--line);
+    }
+    .section {
+      padding: 115px 0;
+    }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      margin-bottom: 57px;
+    }
+    .section-label {
+      margin-bottom: 19px;
+      color: var(--orange);
+      font: 10px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    h2 {
+      margin: 0;
+      font: 400 clamp(42px, 4.8vw, 60px)/1.02 var(--serif);
+      letter-spacing: -1.5px;
+    }
+    .section-description {
+      max-width: 330px;
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 35px;
+    }
+    .step {
+      position: relative;
+      padding-top: 27px;
+      border-top: 1px solid #dcd6cc;
+      transition: border-color 0.25s;
+    }
+    .step:hover {
+      border-color: var(--orange);
+    }
+    .step-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+    .step-number {
+      color: var(--orange);
+      font: 11px var(--mono);
+    }
+    .step-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--orange);
+      background: #ffffff60;
+      font-size: 14px;
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+    }
+    .step:hover .step-icon {
+      background: var(--orange);
+      color: white;
+      transform: rotate(-7deg);
+    }
+    .step h3 {
+      margin: 0 0 13px;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    .step p {
+      max-width: 300px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.95;
+    }
+    /* PRODUCT TYPES */
+    .creators {
+      padding: 0 0 115px;
+    }
+    .creator-panel {
+      padding: 55px;
+      background: #f1eee7;
+      border: 1px solid #e9e4da;
+      border-radius: 10px;
+    }
+    .creator-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 25px;
+      margin-bottom: 39px;
+    }
+    .creator-heading h2 {
+      font-size: clamp(36px, 4vw, 48px);
+    }
+    .creator-heading p {
+      max-width: 290px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .creator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid #dcd5ca;
+      border-bottom: 1px solid #dcd5ca;
+    }
+    .creator-item {
+      min-height: 138px;
+      padding: 26px 18px 26px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .creator-item + .creator-item {
+      padding-left: 22px;
+      border-left: 1px solid #dcd5ca;
+    }
+    .creator-item i {
+      color: var(--orange);
+      font-size: 17px;
+    }
+    .creator-item span {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    /* FINAL CTA */
+    .final-cta {
+      padding: 115px 0 125px;
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+    .final-cta .section-label {
+      margin-bottom: 22px;
+    }
+    .final-cta h2 {
+      max-width: 700px;
+      margin-inline: auto;
+      font-size: clamp(46px, 6vw, 73px);
+      line-height: 1;
+    }
+    .final-cta h2 em {
+      color: var(--orange);
+    }
+    .final-cta p {
+      max-width: 420px;
+      margin: 23px auto 29px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .final-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 16px 21px;
+      border-radius: 7px;
+      background: var(--ink);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .final-button:hover {
+      background: var(--orange);
+      transform: translateY(-2px);
+    }
+    .final-button i {
+      font-size: 10px;
+    }
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line);
+    }
+    .footer-inner {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-inner .brand {
+      font-size: 16px;
+    }
+    .footer-note {
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .back-top {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      font-size: 11px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .back-top:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    /* ANIMATIONS */
+    .reveal {
       opacity: 0;
-      transform: translateY(15px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(22px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2, 0.65, 0.3, 1);
     }
-
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    @keyframes float {
-      0%, 100% { translate: 0 0; }
-      50% { translate: 0 -9px; }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 36px, 540px); }
-      nav { height: 70px; }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    @keyframes levitate {
+      0%, 100% {
+        translate: 0 0;
+      }
+      50% {
+        translate: 0 -9px;
+      }
+    }
+    /* RESPONSIVE */
+    @media (min-width: 1400px) {
+      .hero {
+        padding-top: 140px;
+        padding-bottom: 140px;
+      }
+    }
+    @media (max-width: 950px) {
+      .container {
+        width: calc(100% - 64px);
+      }
+      .hero {
+        gap: 28px;
+        padding: 90px 0;
+      }
+      h1 {
+        font-size: clamp(53px, 7vw, 70px);
+        letter-spacing: -4px;
+      }
+      .showcase {
+        min-height: 420px;
+      }
+      .showcase-ring {
+        width: 330px;
+        height: 330px;
+      }
+      .showcase-glow {
+        width: 320px;
+        height: 320px;
+      }
+      .product-window {
+        width: min(330px, 90%);
+      }
+      .cover {
+        min-height: 245px;
+      }
+      .cover-title {
+        font-size: 47px;
+      }
+      .floating-card {
+        right: -8px;
+        bottom: 26px;
+      }
+      .section {
+        padding: 90px 0;
+      }
+      .creator-panel {
+        padding: 38px;
+      }
+      .creators {
+        padding-bottom: 90px;
+      }
+    }
+    @media (max-width: 700px) {
+      .container {
+        width: calc(100% - 40px);
+      }
+      .nav-inner {
+        height: 72px;
+      }
+      .brand {
+        gap: 8px;
+        font-size: 17px;
+      }
+      .brand-mark {
+        font-size: 19px;
+        width: 27px;
+      }
+      .nav-right {
+        gap: 0;
+      }
+      .nav-link {
+        display: none;
+      }
+      .nav-cta {
+        padding: 11px 12px;
+        font-size: 11px;
+      }
       .hero {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 66px 0 60px;
+        gap: 36px;
+        padding: 76px 0 67px;
       }
-      h1 { font-size: clamp(49px, 12vw, 68px); letter-spacing: -3px; }
-      .hero-copy { font-size: 14px; }
-      .visual { min-height: 390px; margin-top: 4px; }
-      .halo { width: 290px; height: 290px; }
-      .preview-card { width: min(310px, 82%); }
-      .book { height: 200px; }
-      .book-title { font-size: 38px; }
-      .floating-note { right: -3px; bottom: 37px; }
-      .how { padding: 58px 0 65px; }
-      .section-head { display: block; }
-      .section-desc { margin-top: 15px; }
-      .steps { grid-template-columns: 1fr; gap: 10px; }
-      .step { min-height: auto; padding: 21px; }
-      .step-number { margin-bottom: 20px; }
-      .cta { padding: 30px 24px; display: block; margin-bottom: 48px; }
-      .cta a { margin-top: 25px; }
-      footer { padding: 22px 0; flex-wrap: wrap; }
+      .eyebrow {
+        margin-bottom: 25px;
+        font-size: 9px;
+        letter-spacing: 1.2px;
+      }
+      h1 {
+        font-size: clamp(55px, 12vw, 76px);
+        letter-spacing: -3.8px;
+        line-height: 1;
+      }
+      h1 em {
+        letter-spacing: -1.5px;
+      }
+      .hero-description {
+        margin: 23px 0 26px;
+        font-size: 13px;
+        line-height: 1.9;
+      }
+      .signup-row {
+        gap: 3px;
+      }
+      .signup-row input {
+        padding: 13px 8px;
+        font-size: 12px;
+      }
+      .signup-button {
+        gap: 8px;
+        padding: 0 12px;
+        font-size: 11px;
+      }
+      .consent {
+        font-size: 10px;
+      }
+      .hero-footnote {
+        margin-top: 19px;
+      }
+      .showcase {
+        min-height: 385px;
+      }
+      .showcase-ring {
+        width: 300px;
+        height: 300px;
+      }
+      .showcase-glow {
+        width: 290px;
+        height: 290px;
+      }
+      .product-window {
+        width: min(325px, 86%);
+        padding: 17px;
+      }
+      .cover {
+        min-height: 230px;
+        padding: 22px;
+      }
+      .cover-title {
+        font-size: 46px;
+      }
+      .floating-card {
+        right: -3px;
+        bottom: 24px;
+        min-width: 160px;
+        padding: 14px;
+      }
+      .section {
+        padding: 76px 0;
+      }
+      .section-heading {
+        display: block;
+        margin-bottom: 38px;
+      }
+      .section-label {
+        margin-bottom: 15px;
+      }
+      h2 {
+        font-size: 47px;
+      }
+      .section-description {
+        margin-top: 18px;
+        font-size: 12px;
+      }
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 33px;
+      }
+      .step {
+        padding-top: 21px;
+      }
+      .step-top {
+        margin-bottom: 26px;
+      }
+      .step h3 {
+        font-size: 16px;
+      }
+      .step p {
+        max-width: 380px;
+      }
+      .creators {
+        padding-bottom: 76px;
+      }
+      .creator-panel {
+        padding: 28px 22px;
+      }
+      .creator-heading {
+        display: block;
+        margin-bottom: 28px;
+      }
+      .creator-heading h2 {
+        font-size: 42px;
+      }
+      .creator-heading p {
+        margin-top: 16px;
+      }
+      .creator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .creator-item {
+        min-height: 112px;
+        padding: 21px 10px 20px 0;
+      }
+      .creator-item + .creator-item {
+        padding-left: 15px;
+      }
+      .creator-item:nth-child(3) {
+        border-left: 0;
+        padding-left: 0;
+        border-top: 1px solid #dcd5ca;
+      }
+      .creator-item:nth-child(4) {
+        border-top: 1px solid #dcd5ca;
+      }
+      .final-cta {
+        padding: 85px 0 90px;
+      }
+      .final-cta h2 {
+        font-size: clamp(47px, 10vw, 62px);
+      }
+      .final-cta p {
+        font-size: 12px;
+      }
+      .footer-inner {
+        min-height: 105px;
+        flex-wrap: wrap;
+        padding: 23px 0;
+      }
+      .footer-note {
+        order: 3;
+        width: 100%;
+      }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+    @media (max-width: 370px) {
+      .container {
+        width: calc(100% - 32px);
       }
-      .fade-in { opacity: 1; transform: none; }
+      h1 {
+        font-size: 51px;
+      }
+      .signup-button {
+        padding: 0 9px;
+        font-size: 10px;
+      }
+      .showcase {
+        min-height: 345px;
+      }
+      .cover {
+        min-height: 210px;
+      }
+      .cover-title {
+        font-size: 40px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <nav>
+  <header class="navigation">
+    <div class="container nav-inner">
       <a class="brand" href="#" aria-label="Sneaky Peek home">
-        <span class="mark" aria-hidden="true">[·]</span>
+        <span class="brand-mark" aria-hidden="true">[·]</span>
         <span>sneaky peek</span>
       </a>
-      <a class="nav-link" href="#join">Get early access <span>↗</span></a>
-    </nav>
-
-    <main>
-      <section class="hero">
-        <div>
-          <div class="eyebrow"><span class="dot"></span> A new way to sell what you create</div>
-          <h1>Let them peek.<br>Make them <em>want more.</em></h1>
-          <p class="hero-copy">
-            Your work deserves more than a cover and a checkout button.
-            Sneaky Peek turns what you create into interactive previews
-            that give people a taste — and a reason to want the whole thing.
-          </p>
-
-          <form class="form-box" id="waitlist-form">
-            <div class="input-row">
+      <nav class="nav-right" aria-label="Main navigation">
+        <a class="nav-link" href="#how-it-works">How it works</a>
+        <a class="nav-link" href="#creators">For creators</a>
+        <a class="nav-cta" href="#waitlist">
+          Get early access
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="container hero">
+      <div class="hero-content">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          A new way to sell what you create
+        </div>
+        <h1>
+          Let them peek.<br>
+          Make them <em>want more.</em>
+        </h1>
+        <p class="hero-description">
+          Your work deserves more than a cover and a checkout button.
+          Turn what you've created into an experience people can explore
+          before they buy.
+        </p>
+        <form class="signup" id="waitlist-form">
+          <div class="signup-row">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email address"
+              autocomplete="email"
+              aria-label="Email address"
+              required
+            >
+            <button class="signup-button" id="submit-button" type="submit">
+              Join the waitlist
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="consent" required>
+            <span>
+              I'd like to receive Sneaky Peek launch news and early-access
+              updates. I can unsubscribe anytime.
+            </span>
+          </label>
+          <div class="honeypot" aria-hidden="true">
+            <label>
+              Leave this field empty
               <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Your email address"
-                autocomplete="email"
-                required
-                aria-label="Your email address"
+                type="text"
+                name="website"
+                id="website"
+                tabindex="-1"
+                autocomplete="off"
               >
-              <button id="submit-button" type="submit">Get early access ↗</button>
-            </div>
-
-            <label class="consent">
-              <input type="checkbox" id="consent" required>
-              <span>I'd like to receive Sneaky Peek launch news and early-access updates. I can unsubscribe anytime.</span>
             </label>
-
-            <div class="honeypot" aria-hidden="true">
-              <label>Leave this empty <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"></label>
-            </div>
-
-            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
-          </form>
+          </div>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+        <div class="hero-footnote">
+          <i class="fa-solid fa-lock" aria-hidden="true"></i>
+          <span>Just the important updates. No unnecessary noise.</span>
         </div>
-
-        <div class="visual" aria-label="Illustration of a digital product preview">
-          <div class="halo"></div>
-          <div class="preview-card">
-            <div class="preview-top">
-              <span>A little preview</span>
-              <span class="preview-label">Made to tempt</span>
+      </div>
+      <div class="showcase" aria-label="Example digital product preview">
+        <div class="showcase-glow"></div>
+        <div class="showcase-ring"></div>
+        <article class="product-window">
+          <div class="window-top">
+            <div class="window-brand">
+              <span class="window-brand-mark">[·]</span>
+              sneaky peek
             </div>
-            <div class="book">
-              <div class="book-small">A field guide for the curious</div>
-              <div class="book-title">The art of starting.</div>
-              <div class="book-bottom">CHAPTER 01 &nbsp; · &nbsp; BEGIN HERE</div>
+            <span class="window-status">LIVE PREVIEW</span>
+          </div>
+          <div class="cover">
+            <div class="cover-kicker">A field guide for the curious</div>
+            <div class="cover-title">
+              The art of starting.
             </div>
-            <div class="preview-caption">
-              <strong>Something worth opening.</strong>
-              <small>01 / 05</small>
+            <div class="cover-bottom">
+              <span>CHAPTER 01</span>
+              <span>BEGIN HERE</span>
             </div>
           </div>
-          <div class="floating-note">
-            <div class="note-label">The little secret</div>
-            <div class="note-text">Give them a taste.</div>
-            <div class="note-sub">Let curiosity do the rest.</div>
+          <div class="product-info">
+            <div>
+              <div class="product-name">Something worth opening.</div>
+              <div class="product-type">An interactive product preview</div>
+            </div>
+            <div class="product-arrow">
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </div>
           </div>
+        </article>
+        <div class="floating-card">
+          <div class="floating-icon">
+            <i class="fa-solid fa-sparkles" aria-hidden="true"></i>
+          </div>
+          <div class="floating-label">The little secret</div>
+          <div class="floating-title">Give them a taste.</div>
+          <div class="floating-subtitle">Let curiosity do the rest.</div>
         </div>
-      </section>
-
-      <div class="section-line"></div>
-
-      <section class="how fade-in" id="how">
-        <div class="section-head">
+      </div>
+    </section>
+    <div class="section-divider"></div>
+    <section class="container section" id="how-it-works">
+      <div class="section-heading reveal">
+        <div>
+          <div class="section-label">01 / The experience</div>
+          <h2>Make the first look<br>count.</h2>
+        </div>
+        <p class="section-description">
+          Help your audience understand the value of your work by letting
+          them experience a little of it first.
+        </p>
+      </div>
+      <div class="steps">
+        <article class="step reveal">
+          <div class="step-top">
+            <span class="step-number">01 — BRING IT</span>
+            <span class="step-icon">
+              <i class="fa-regular fa-folder-open" aria-hidden="true"></i>
+            </span>
+          </div>
+          <h3>Start with your creation.</h3>
+          <p>
+            Bring your book, guide, course, template or digital product.
+            Your work is where everything begins.
+          </p>
+        </article>
+        <article class="step reveal delay-1">
+          <div class="step-top">
+            <span class="step-number">02 — MAKE A PEEK</span>
+            <span class="step-icon">
+              <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+            </span>
+          </div>
+          <h3>Turn it into an experience.</h3>
+          <p>
+            Create an interactive preview that lets people see what makes
+            your product worth having.
+          </p>
+        </article>
+        <article class="step reveal delay-2">
+          <div class="step-top">
+            <span class="step-number">03 — LET IT WORK</span>
+            <span class="step-icon">
+              <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i>
+            </span>
+          </div>
+          <h3>Give curiosity somewhere to go.</h3>
+          <p>
+            Share your preview with your audience and guide interested
+            people towards your full product.
+          </p>
+        </article>
+      </div>
+    </section>
+    <section class="container creators reveal" id="creators">
+      <div class="creator-panel">
+        <div class="creator-heading">
           <div>
-            <div class="section-kicker">Simple by design</div>
-            <h2>Make the first look<br>count.</h2>
+            <div class="section-label">02 / Made for creators</div>
+            <h2>Your work.<br>A better first impression.</h2>
           </div>
-          <p class="section-desc">
-            Let people experience the value of your work before they decide to buy it.
+          <p>
+            Whatever you create, give people a more compelling reason
+            to discover it.
           </p>
         </div>
-
-        <div class="steps">
-          <article class="step">
-            <div class="step-number">01 / BRING IT</div>
-            <h3>Start with your creation.</h3>
-            <p>Bring your book, guide, course, template or digital product. Your work is the starting point.</p>
-          </article>
-
-          <article class="step">
-            <div class="step-number">02 / MAKE A PEEK</div>
-            <h3>Turn it into an experience.</h3>
-            <p>Create a preview that helps people see, feel and understand what makes your product worth having.</p>
-          </article>
-
-          <article class="step">
-            <div class="step-number">03 / LET IT WORK</div>
-            <h3>Give curiosity somewhere to go.</h3>
-            <p>Share your preview with your audience and lead interested people toward your full product.</p>
-          </article>
+        <div class="creator-grid">
+          <div class="creator-item">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            <span>Books & e-books</span>
+          </div>
+          <div class="creator-item">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            <span>Courses & tutorials</span>
+          </div>
+          <div class="creator-item">
+            <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+            <span>Guides & resources</span>
+          </div>
+          <div class="creator-item">
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+            <span>Templates & digital products</span>
+          </div>
         </div>
-      </section>
-
-      <section class="cta fade-in">
-        <div>
-          <div class="section-kicker">Something good is taking shape</div>
-          <h2>Your next customer might just need a <em>peek.</em></h2>
-          <p>Get on the list. Be among the first to experience Sneaky Peek.</p>
-        </div>
-        <a href="#join" onclick="document.getElementById('email').focus()">I'm interested ↗</a>
-      </section>
-
-      <div id="join"></div>
-    </main>
-
-    <footer>
-      <a class="brand" href="#">
-        <span class="mark" aria-hidden="true">[·]</span>
+      </div>
+    </section>
+    <section class="final-cta">
+      <div class="container reveal">
+        <div class="section-label">03 / Your invitation</div>
+        <h2>
+          Great work deserves<br>
+          a <em>closer look.</em>
+        </h2>
+        <p>
+          Sneaky Peek is taking shape. Join the waitlist to hear about
+          early access and be among the first to try it.
+        </p>
+        <a class="final-button" href="#waitlist">
+          Get early access
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container footer-inner">
+      <a class="brand" href="#" aria-label="Sneaky Peek home">
+        <span class="brand-mark" aria-hidden="true">[·]</span>
         <span>sneaky peek</span>
       </a>
-      <span>Made for people who make things.</span>
-      <span>© <span id="year"></span> Sneaky Peek</span>
-    </footer>
-  </div>
-
+      <span class="footer-note">Made for people who make things.</span>
+      <a class="back-top" href="#" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+      </a>
+    </div>
+  </footer>
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
+    const year = new Date().getFullYear();
+    document.getElementById("waitlist-form").setAttribute("data-year", year);
     const form = document.getElementById("waitlist-form");
     const emailInput = document.getElementById("email");
     const consentInput = document.getElementById("consent");
     const websiteInput = document.getElementById("website");
     const submitButton = document.getElementById("submit-button");
     const message = document.getElementById("form-message");
-
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-
       if (!consentInput.checked) {
         message.textContent = "Please confirm that you'd like to receive our updates.";
         message.className = "form-message error";
         return;
       }
-
       submitButton.disabled = true;
-      submitButton.textContent = "Joining...";
+      submitButton.innerHTML =
+        'Joining <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
       message.textContent = "";
-
+      message.className = "form-message";
       try {
         const response = await fetch("/api/waitlist", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json"
+          },
           body: JSON.stringify({
             email: emailInput.value.trim(),
             consent: consentInput.checked,
             website: websiteInput.value
           })
         });
-
         const result = await response.json();
-
         if (!response.ok) {
-          throw new Error(result.error || "Something went wrong. Please try again.");
+          throw new Error(
+            result.error || "We couldn't add you just yet. Please try again."
+          );
         }
-
-        message.textContent = "You're on the list. Keep an eye on your inbox. ✨";
+        message.textContent =
+          "You're on the list. We'll be in touch when there's something to share.";
         message.className = "form-message success";
         form.reset();
       } catch (error) {
-        message.textContent = error.message || "Couldn't join just yet. Please try again.";
+        message.textContent =
+          error.message || "Something went wrong. Please try again.";
         message.className = "form-message error";
       } finally {
         submitButton.disabled = false;
-        submitButton.textContent = "Get early access ↗";
+        submitButton.innerHTML =
+          'Join the waitlist <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
       }
     });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
+    // Reveal content as sections enter the viewport.
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const revealElements = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !reduceMotion) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      revealElements.forEach((element) => observer.observe(element));
+    } else {
+      revealElements.forEach((element) => {
+        element.classList.add("is-visible");
       });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(".fade-in").forEach((element) => observer.observe(element));
+    }
   </script>
 </body>
 </html>
