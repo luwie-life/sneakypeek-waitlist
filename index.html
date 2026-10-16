@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf8f4">
+  <meta name="description" content="Give your audience a taste of what you've created. Sneaky Peek turns your digital products into irresistible interactive previews.">
+  <title>Sneaky Peek — Let them peek. Make them want more.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #faf8f4;
+      --ink: #22211f;
+      --muted: #77736d;
+      --orange: #d97757;
+      --line: #e9e4dc;
+      --white: #fffefa;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+      --mono: "DM Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 44px));
+      margin: auto;
+    }
+
+    nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      font-size: 19px;
+      letter-spacing: -0.8px;
+    }
+
+    .mark {
+      width: 27px;
+      height: 27px;
+      color: var(--orange);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: -5px;
+      padding-right: 5px;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-link span { color: var(--orange); margin-left: 5px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 60px;
+      padding: 92px 0 100px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font: 11px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      margin-bottom: 26px;
+    }
+
+    .dot {
+      height: 7px;
+      width: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #d977571c;
+    }
+
+    h1 {
+      font-size: clamp(48px, 6.5vw, 76px);
+      line-height: .99;
+      letter-spacing: -4.5px;
+      font-weight: 500;
+      margin: 0;
+      max-width: 590px;
+    }
+
+    h1 em {
+      color: var(--orange);
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -2px;
+    }
+
+    .hero-copy {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 25px 0 28px;
+    }
+
+    .form-box { max-width: 440px; }
+
+    .input-row {
+      display: flex;
+      padding: 5px;
+      border: 1px solid #ded8ce;
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: 0 5px 22px #34241408;
+      gap: 6px;
+    }
+
+    input[type="email"] {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: none;
+      background: transparent;
+      padding: 13px 11px;
+      color: var(--ink);
+      font: 14px var(--sans);
+    }
+
+    input::placeholder { color: #a39d94; }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+      padding: 0 18px;
+      font: 600 13px var(--sans);
+      white-space: nowrap;
+      transition: background .2s, transform .2s;
+    }
+
+    button:hover { background: var(--orange); transform: translateY(-1px); }
+    button:disabled { opacity: .65; cursor: wait; transform: none; }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 13px 2px 0;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .consent input { accent-color: var(--orange); margin-top: 3px; }
+
+    .form-message {
+      min-height: 20px;
+      font-size: 12px;
+      margin: 12px 2px 0;
+      color: var(--muted);
+    }
+
+    .form-message.success { color: #387653; }
+    .form-message.error { color: #b64b3a; }
+
+    .honeypot {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .visual {
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .halo {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: #e9b79b30;
+      filter: blur(2px);
+      z-index: -1;
+    }
+
+    .preview-card {
+      width: min(330px, 83%);
+      background: var(--white);
+      padding: 22px;
+      border: 1px solid #e8e0d5;
+      border-radius: 15px;
+      box-shadow: 0 25px 70px #3a2a1914;
+      transform: rotate(-3deg);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font: 10px var(--mono);
+      color: #999087;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 17px;
+    }
+
+    .preview-label {
+      color: var(--orange);
+      border: 1px solid #edc6b7;
+      border-radius: 20px;
+      padding: 5px 8px;
+      font-size: 9px;
+    }
+
+    .book {
+      height: 220px;
+      padding: 24px 21px;
+      background: #e8d7c3;
+      border-radius: 4px 10px 10px 4px;
+      box-shadow: inset 5px 0 0 #c7af94, 0 8px 15px #382b1a13;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border: 1px solid #a17f5b65;
+      border-radius: 50%;
+      right: -55px;
+      bottom: -55px;
+      box-shadow: 0 0 0 14px #a17f5b10, 0 0 0 28px #a17f5b0b;
+    }
+
+    .book-small {
+      font: 9px var(--mono);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #78654f;
+    }
+
+    .book-title {
+      font: 42px/.91 var(--serif);
+      letter-spacing: -1px;
+      color: #3c342a;
+      max-width: 220px;
+    }
+
+    .book-bottom {
+      font: 9px var(--mono);
+      color: #78654f;
+      letter-spacing: .8px;
+    }
+
+    .preview-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      font-size: 12px;
+    }
+
+    .preview-caption strong { font-weight: 600; }
+    .preview-caption small { color: var(--muted); font-size: 10px; }
+
+    .floating-note {
+      position: absolute;
+      right: -1px;
+      bottom: 55px;
+      background: #fffefaee;
+      border: 1px solid #e9e1d7;
+      backdrop-filter: blur(14px);
+      padding: 15px 17px;
+      border-radius: 12px;
+      box-shadow: 0 12px 35px #34241410;
+      transform: rotate(3deg);
+      animation: float 7s ease-in-out infinite reverse;
+    }
+
+    .note-label {
+      font: 9px var(--mono);
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+
+    .note-text { font-size: 12px; font-weight: 600; }
+    .note-sub { color: var(--muted); font-size: 10px; margin-top: 5px; }
+
+    .section-line { border-top: 1px solid var(--line); }
+
+    .how {
+      padding: 75px 0 90px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 25px;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--orange);
+      font: 10px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 13px;
+    }
+
+    h2 {
+      font: 400 clamp(34px, 4vw, 48px)/1.08 var(--serif);
+      letter-spacing: -1px;
+      margin: 0;
+    }
+
+    .section-desc {
+      max-width: 290px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0 0 4px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      background: #fffefa75;
+      padding: 24px;
+      border-radius: 12px;
+      min-height: 190px;
+      transition: transform .25s, border-color .25s, background .25s;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+      border-color: #d9b6a5;
+      background: var(--white);
+    }
+
+    .step-number {
+      color: var(--orange);
+      font: 11px var(--mono);
+      margin-bottom: 31px;
+    }
+
+    .step h3 { font-size: 16px; margin: 0 0 10px; letter-spacing: -.3px; }
+    .step p { color: var(--muted); font-size: 12px; line-height: 1.75; margin: 0; }
+
+    .cta {
+      margin: 0 0 70px;
+      padding: 48px;
+      background: #292724;
+      color: #faf8f4;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .cta h2 { max-width: 470px; }
+    .cta h2 em { color: #e9a083; }
+    .cta p { color: #bcb6ae; font-size: 13px; line-height: 1.7; margin: 14px 0 0; }
+
+    .cta a {
+      flex-shrink: 0;
+      display: inline-block;
+      background: #faf8f4;
+      color: var(--ink);
+      border-radius: 9px;
+      padding: 15px 19px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .2s;
+    }
+
+    .cta a:hover { background: #e9c2b1; }
+
+    footer {
+      min-height: 90px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    footer .brand { color: var(--ink); font-size: 15px; }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes float {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -9px; }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 540px); }
+      nav { height: 70px; }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 66px 0 60px;
+      }
+      h1 { font-size: clamp(49px, 12vw, 68px); letter-spacing: -3px; }
+      .hero-copy { font-size: 14px; }
+      .visual { min-height: 390px; margin-top: 4px; }
+      .halo { width: 290px; height: 290px; }
+      .preview-card { width: min(310px, 82%); }
+      .book { height: 200px; }
+      .book-title { font-size: 38px; }
+      .floating-note { right: -3px; bottom: 37px; }
+      .how { padding: 58px 0 65px; }
+      .section-head { display: block; }
+      .section-desc { margin-top: 15px; }
+      .steps { grid-template-columns: 1fr; gap: 10px; }
+      .step { min-height: auto; padding: 21px; }
+      .step-number { margin-bottom: 20px; }
+      .cta { padding: 30px 24px; display: block; margin-bottom: 48px; }
+      .cta a { margin-top: 25px; }
+      footer { padding: 22px 0; flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .fade-in { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#" aria-label="Sneaky Peek home">
+        <span class="mark" aria-hidden="true">[·]</span>
+        <span>sneaky peek</span>
+      </a>
+      <a class="nav-link" href="#join">Get early access <span>↗</span></a>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> A new way to sell what you create</div>
+          <h1>Let them peek.<br>Make them <em>want more.</em></h1>
+          <p class="hero-copy">
+            Your work deserves more than a cover and a checkout button.
+            Sneaky Peek turns what you create into interactive previews
+            that give people a taste — and a reason to want the whole thing.
+          </p>
+
+          <form class="form-box" id="waitlist-form">
+            <div class="input-row">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your email address"
+                autocomplete="email"
+                required
+                aria-label="Your email address"
+              >
+              <button id="submit-button" type="submit">Get early access ↗</button>
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" id="consent" required>
+              <span>I'd like to receive Sneaky Peek launch news and early-access updates. I can unsubscribe anytime.</span>
+            </label>
+
+            <div class="honeypot" aria-hidden="true">
+              <label>Leave this empty <input type="text" name="website" id="website" tabindex="-1" autocomplete="off"></label>
+            </div>
+
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="visual" aria-label="Illustration of a digital product preview">
+          <div class="halo"></div>
+          <div class="preview-card">
+            <div class="preview-top">
+              <span>A little preview</span>
+              <span class="preview-label">Made to tempt</span>
+            </div>
+            <div class="book">
+              <div class="book-small">A field guide for the curious</div>
+              <div class="book-title">The art of starting.</div>
+              <div class="book-bottom">CHAPTER 01 &nbsp; · &nbsp; BEGIN HERE</div>
+            </div>
+            <div class="preview-caption">
+              <strong>Something worth opening.</strong>
+              <small>01 / 05</small>
+            </div>
+          </div>
+          <div class="floating-note">
+            <div class="note-label">The little secret</div>
+            <div class="note-text">Give them a taste.</div>
+            <div class="note-sub">Let curiosity do the rest.</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-line"></div>
+
+      <section class="how fade-in" id="how">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Simple by design</div>
+            <h2>Make the first look<br>count.</h2>
+          </div>
+          <p class="section-desc">
+            Let people experience the value of your work before they decide to buy it.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">01 / BRING IT</div>
+            <h3>Start with your creation.</h3>
+            <p>Bring your book, guide, course, template or digital product. Your work is the starting point.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">02 / MAKE A PEEK</div>
+            <h3>Turn it into an experience.</h3>
+            <p>Create a preview that helps people see, feel and understand what makes your product worth having.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">03 / LET IT WORK</div>
+            <h3>Give curiosity somewhere to go.</h3>
+            <p>Share your preview with your audience and lead interested people toward your full product.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta fade-in">
+        <div>
+          <div class="section-kicker">Something good is taking shape</div>
+          <h2>Your next customer might just need a <em>peek.</em></h2>
+          <p>Get on the list. Be among the first to experience Sneaky Peek.</p>
+        </div>
+        <a href="#join" onclick="document.getElementById('email').focus()">I'm interested ↗</a>
+      </section>
+
+      <div id="join"></div>
+    </main>
+
+    <footer>
+      <a class="brand" href="#">
+        <span class="mark" aria-hidden="true">[·]</span>
+        <span>sneaky peek</span>
+      </a>
+      <span>Made for people who make things.</span>
+      <span>© <span id="year"></span> Sneaky Peek</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("waitlist-form");
+    const emailInput = document.getElementById("email");
+    const consentInput = document.getElementById("consent");
+    const websiteInput = document.getElementById("website");
+    const submitButton = document.getElementById("submit-button");
+    const message = document.getElementById("form-message");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!consentInput.checked) {
+        message.textContent = "Please confirm that you'd like to receive our updates.";
+        message.className = "form-message error";
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Joining...";
+      message.textContent = "";
+
+      try {
+        const response = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: emailInput.value.trim(),
+            consent: consentInput.checked,
+            website: websiteInput.value
+          })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || "Something went wrong. Please try again.");
+        }
+
+        message.textContent = "You're on the list. Keep an eye on your inbox. ✨";
+        message.className = "form-message success";
+        form.reset();
+      } catch (error) {
+        message.textContent = error.message || "Couldn't join just yet. Please try again.";
+        message.className = "form-message error";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Get early access ↗";
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".fade-in").forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>
